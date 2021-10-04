@@ -8,5 +8,7 @@ public class PatientDTO {
 	private Long patientId;
 	private String patientName;
 	private Long contactNumber;
+	private int isActive;
+	private int isDelete;
 	private List<UserDTO> id;
 }

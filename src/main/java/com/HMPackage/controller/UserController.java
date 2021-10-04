@@ -2,6 +2,7 @@ package com.HMPackage.controller;
 
 import java.util.Optional;
 import com.HMPackage.DTO.JWTtokenDTO;
+import com.HMPackage.DTO.UserRoleDTO;
 import com.HMPackage.baseResponse.PageResponse;
 import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.HMPackage.DTO.UserDTO;
 import com.HMPackage.baseResponse.BaseResponse;
 import com.HMPackage.entity.User;
 import com.HMPackage.service.UserServiceInterface;
+import javax.annotation.security.RolesAllowed;
 
 @RestController
 @RequestMapping("/user")
@@ -24,9 +26,9 @@ public class UserController {
 	private UserServiceInterface userServiceInterface;
 
 	@GetMapping("/login")
-    public BaseResponse login(@RequestBody JWTtokenDTO jWTtokenDTO){
+    public BaseResponse login(@RequestBody UserRoleDTO userRoleDTO){
 	    BaseResponse baseResponse = null;
-	    baseResponse = BaseResponse.builder().Data(userServiceInterface.login(jWTtokenDTO)).build();
+	    baseResponse = BaseResponse.builder().Data(userServiceInterface.login(userRoleDTO)).build();
 	    return baseResponse;
     }
 
@@ -37,6 +39,7 @@ public class UserController {
         return baseResponse;
     }
 
+    @RolesAllowed(value = "USER")
     @GetMapping("/get/{id}")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<User>> getUserById(@PathVariable Long id){
@@ -46,6 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/update")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<User>> update(@RequestBody UserDTO userDTO){
     	BaseResponse<Optional<User>> baseResponse = null;
@@ -53,6 +57,7 @@ public class UserController {
     	return baseResponse;
     }
 
+    @RolesAllowed(value = "ADMIN")
     @PutMapping("/softdelete")
     @Authorization(value="Bearer")
     public BaseResponse deletesoft(@RequestBody UserDTO userDTO){
@@ -62,6 +67,7 @@ public class UserController {
     }
 
     @GetMapping("/pagination/{pageno}/{pageSize}/{name}")
+    @RolesAllowed(value = "ADMIN")
     @Authorization(value="Bearer")
     private PageResponse<User> pageByUserName(@PathVariable int pageno,@PathVariable int pageSize,@PathVariable String name){
         return userServiceInterface.pageByUserName(pageno,pageSize,name);

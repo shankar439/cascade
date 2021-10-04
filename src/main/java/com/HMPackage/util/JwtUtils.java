@@ -1,5 +1,6 @@
 package com.HMPackage.util;
 
+import com.HMPackage.entity.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -7,15 +8,17 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 
 public class JwtUtils {
-    public static String generateToken( String subject,Long id, String name) {
+    public static String generateToken(String subject, Long id, String name,List<Role>authorities) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         JwtBuilder builder = Jwts.builder()
                 .setSubject(subject)
                 .claim("userId", id)
+                .claim("Authorities",authorities)
                 .claim("userName", name)
                 .setIssuedAt(now)
                 .signWith(SignatureAlgorithm.HS256, "secret");

@@ -14,6 +14,7 @@ import com.HMPackage.DTO.DiseaseDTO;
 import com.HMPackage.baseResponse.BaseResponse;
 import com.HMPackage.entity.Disease;
 import com.HMPackage.serviceImplementation.DiseaseServiceImpl;
+import javax.annotation.security.RolesAllowed;
 
 @RestController
 @RequestMapping("/disease")
@@ -22,6 +23,7 @@ public class DiseaseController {
 	private DiseaseServiceImpl diseaseServiceImpl;
 
     @PostMapping("/create")
+    @RolesAllowed(value = "ADMIN")
     @Authorization(value="Bearer")
     public BaseResponse addDisease(@RequestBody DiseaseDTO diseaseDTO) {
     	BaseResponse<Disease> baseResponse = null;
@@ -30,6 +32,7 @@ public class DiseaseController {
     }
 
     @GetMapping("/getAll")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse<List<Disease>> getAll(){
     	BaseResponse<List<Disease>> baseResponse = null;
@@ -38,6 +41,7 @@ public class DiseaseController {
     }
 
     @PutMapping("/update")
+    @RolesAllowed(value = "ADMIN")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<Disease>> updateDiseaseById(@RequestBody DiseaseDTO diseaseDTO){
     	BaseResponse<Optional<Disease>> baseResponse = null;
@@ -46,6 +50,7 @@ public class DiseaseController {
     }
 
     @PutMapping("/softdelete")
+    @RolesAllowed(value = "ADMIN")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<Disease>>  deleteSoft(@RequestBody DiseaseDTO diseaseDTO){
     	BaseResponse<Optional<Disease>> baseResponse = null;

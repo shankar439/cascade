@@ -8,5 +8,8 @@ import java.util.List;
 @Data
 public class UserRoleDTO {
     private Long userRoleId;
-    private List<UserRole>userRoles;
+    private String token;
+    private String name;
+    private String password;
+    private List<UserRole> userRoles;
 }

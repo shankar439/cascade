@@ -15,6 +15,8 @@ import com.HMPackage.baseResponse.BaseResponse;
 import com.HMPackage.entity.Appointment;
 import com.HMPackage.service.AppointmentServiceInterface;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/appointment")
 public class AppointmentController {
@@ -22,6 +24,7 @@ public class AppointmentController {
 	private AppointmentServiceInterface appointmentServiceInterface;
 
     @PostMapping("/create")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
     	BaseResponse<Appointment> baseResponse = null;
@@ -30,6 +33,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/getAll")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse<List<Appointment>> list() {
     	BaseResponse<List<Appointment>> baseResponse = null;
@@ -38,6 +42,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/update")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<Appointment>> update(@RequestBody AppointmentDTO appointmentDTO){
     	BaseResponse<Optional<Appointment>> baseResponse = null;
@@ -46,6 +51,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/softdelete")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<Appointment>> deleteSoftAppointment(@RequestBody AppointmentDTO appointmentDTO){
     	BaseResponse<Optional<Appointment>> baseResponse = null;

@@ -16,6 +16,8 @@ import com.HMPackage.baseResponse.BaseResponse;
 import com.HMPackage.entity.Doctor;
 import com.HMPackage.service.DoctorServiceInterface;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 @RequestMapping("/doctor")
 public class DoctorControler {
@@ -23,6 +25,7 @@ public class DoctorControler {
 	private DoctorServiceInterface doctorServiceInterface;
 
     @PostMapping("/create")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse AddDoctor(@RequestBody DoctorDTO doctorDTO) {
     	BaseResponse<Doctor> baseResponse = null;
@@ -31,6 +34,7 @@ public class DoctorControler {
     }
 
     @GetMapping("/get/{doctorId}")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<Doctor>> findByDoctorId(@PathVariable Long doctorId){
     	BaseResponse<Optional<Doctor>> baseResponse = null;
@@ -39,6 +43,7 @@ public class DoctorControler {
     }
 
     @PutMapping("/update")
+    @RolesAllowed(value = "USER")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<Doctor>> updateDoctor(@RequestBody DoctorDTO doctorDTO){
     	BaseResponse<Optional<Doctor>> baseResponse = null;
@@ -47,6 +52,7 @@ public class DoctorControler {
     }
 
     @PutMapping("/softdelete")
+    @RolesAllowed(value = "ADMIN")
     @Authorization(value="Bearer")
     public BaseResponse<Optional<Doctor>>  deleteSoft(@RequestBody DoctorDTO doctorDTO){
     	BaseResponse<Optional<Doctor>> baseResponse = null;
@@ -55,6 +61,7 @@ public class DoctorControler {
     }
 
     @GetMapping("/pagination/{pageno}/{pageSize}/{doctorName}")
+    @RolesAllowed(value = "ADMIN")
     @Authorization(value="Bearer")
     private PageResponse<Doctor> pageByDoctorName(@PathVariable int pageno, @PathVariable int pageSize, @PathVariable String doctorName){
         return doctorServiceInterface.pageByDoctorName(pageno, pageSize, doctorName);

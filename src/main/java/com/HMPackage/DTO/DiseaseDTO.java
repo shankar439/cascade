@@ -6,5 +6,6 @@ import lombok.Data;
 public class DiseaseDTO {
 	private Long diseaseId;
 	private String diseaseName;
-
+	private int isActive;
+	private int isDelete;
 }

@@ -5,14 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac2f4910-b81d-41d0-83e0-57c2e8a9bba2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/RoleDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserRoleDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/RoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/UserRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/AppointmentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/AppointmentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/DiseaseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/DiseaseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/DoctorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/DoctorDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/JWTtokenDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/JWTtokenDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/PatientDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/PatientDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserRoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserRoleDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/AppointmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/AppointmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/DiseaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/DiseaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/DoctorControler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/DoctorControler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/PatientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/PatientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/UserRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/UserRoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/service/UserServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/service/UserServiceInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/serviceImplementation/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/serviceImplementation/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/util/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/util/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +42,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://C:/Program Files/Java/jdk-16.0.2/lib/src.zip!/java.base/java/util/Objects.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -65,6 +81,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../New folder/kaushik authentication" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="enabled" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
