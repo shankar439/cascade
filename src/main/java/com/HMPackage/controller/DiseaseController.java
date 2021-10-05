@@ -2,7 +2,6 @@ package com.HMPackage.controller;
 
 import java.util.List;
 import java.util.Optional;
-import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +23,6 @@ public class DiseaseController {
 
     @PostMapping("/create")
     @RolesAllowed(value = "ADMIN")
-    @Authorization(value="Bearer")
     public BaseResponse addDisease(@RequestBody DiseaseDTO diseaseDTO) {
     	BaseResponse<Disease> baseResponse = null;
         baseResponse = BaseResponse.<Disease>builder().Data(diseaseServiceImpl.AddDisease(diseaseDTO)).build();
@@ -33,7 +31,6 @@ public class DiseaseController {
 
     @GetMapping("/getAll")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse<List<Disease>> getAll(){
     	BaseResponse<List<Disease>> baseResponse = null;
     	baseResponse = BaseResponse.<List<Disease>>builder().Data(diseaseServiceImpl.listAlldisease()).build();
@@ -42,7 +39,6 @@ public class DiseaseController {
 
     @PutMapping("/update")
     @RolesAllowed(value = "ADMIN")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<Disease>> updateDiseaseById(@RequestBody DiseaseDTO diseaseDTO){
     	BaseResponse<Optional<Disease>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<Disease>>builder().Data(diseaseServiceImpl.UpdateDiseaseById(diseaseDTO)).build();
@@ -51,7 +47,6 @@ public class DiseaseController {
 
     @PutMapping("/softdelete")
     @RolesAllowed(value = "ADMIN")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<Disease>>  deleteSoft(@RequestBody DiseaseDTO diseaseDTO){
     	BaseResponse<Optional<Disease>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<Disease>>builder().Data(diseaseServiceImpl.DeleteSoftDisease(diseaseDTO)).build();

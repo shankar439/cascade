@@ -12,13 +12,13 @@ import java.util.List;
 
 
 public class JwtUtils {
-    public static String generateToken(String subject, Long id, String name,List<Role>authorities) {
+    public static String generateToken(String subject, Long id, String name,List<Role>role) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         JwtBuilder builder = Jwts.builder()
                 .setSubject(subject)
                 .claim("userId", id)
-                .claim("Authorities",authorities)
+                .claim("Authorities",role)
                 .claim("userName", name)
                 .setIssuedAt(now)
                 .signWith(SignatureAlgorithm.HS256, "secret");

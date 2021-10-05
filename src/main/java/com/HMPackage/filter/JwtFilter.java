@@ -28,12 +28,12 @@ public class JwtFilter extends OncePerRequestFilter {
             String token = jwtUtils.getJwtFromRequest(request);
 
             if (StringUtils.hasText(token) && jwtUtils.validateToken(token, "secret")) {
-                String id = jwtUtils.getUserNameFromJWTs(token, "secret");
+                String name = jwtUtils.getUserNameFromJWTs(token, "secret");
 
-                if (Strings.isNullOrEmpty(id)) {
+                if (Strings.isNullOrEmpty(name)) {
                     request.getRequestDispatcher("/error" + "invalid").forward(request, response);
                 }
-                UserDetails userDetails = userServiceImpl.loadByUserId(id);
+                UserDetails userDetails = userServiceImpl.loadByUserName(name);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);

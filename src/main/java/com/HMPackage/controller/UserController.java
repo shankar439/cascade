@@ -1,10 +1,8 @@
 package com.HMPackage.controller;
 
 import java.util.Optional;
-import com.HMPackage.DTO.JWTtokenDTO;
 import com.HMPackage.DTO.UserRoleDTO;
 import com.HMPackage.baseResponse.PageResponse;
-import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +39,6 @@ public class UserController {
 
     @RolesAllowed(value = "USER")
     @GetMapping("/get/{id}")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<User>> getUserById(@PathVariable Long id){
     	BaseResponse<Optional<User>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<User>>builder().Data(userServiceInterface.getUserbyId(id)).build();
@@ -50,7 +47,6 @@ public class UserController {
 
     @PutMapping("/update")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<User>> update(@RequestBody UserDTO userDTO){
     	BaseResponse<Optional<User>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<User>>builder().Data(userServiceInterface.updatebyId(userDTO)).build();
@@ -59,7 +55,6 @@ public class UserController {
 
     @RolesAllowed(value = "ADMIN")
     @PutMapping("/softdelete")
-    @Authorization(value="Bearer")
     public BaseResponse deletesoft(@RequestBody UserDTO userDTO){
     	BaseResponse<Optional<User>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<User>>builder().Data(userServiceInterface.deletesoft(userDTO)).build();
@@ -68,7 +63,6 @@ public class UserController {
 
     @GetMapping("/pagination/{pageno}/{pageSize}/{name}")
     @RolesAllowed(value = "ADMIN")
-    @Authorization(value="Bearer")
     private PageResponse<User> pageByUserName(@PathVariable int pageno,@PathVariable int pageSize,@PathVariable String name){
         return userServiceInterface.pageByUserName(pageno,pageSize,name);
     }

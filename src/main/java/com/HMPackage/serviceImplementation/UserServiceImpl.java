@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserServiceInterface{
 					Role role = userRoleobj.getRole();
 					roles.add(role);
 				});
-				String Token = generateToken(  "user", user.get().getId(),user.get().getName(), roles);
+				String Token = generateToken("user", user.get().getId(), user.get().getName(), roles);
 				userRoleDTO.setName(user.get().getName());
 				userRoleDTO.setUserRoleId(user.get().getId());
 				userRoleDTO.setUserRoles(user.get().getUserRole());
@@ -76,8 +76,8 @@ public class UserServiceImpl implements UserServiceInterface{
 		return userRoleDTO;
 	}
 
-	public UserDetails loadByUserId(String id) throws UsernameNotFoundException {
-		Optional<User> user = userRepository.findByName(id);
+	public UserDetails loadByUserName(String name) throws UsernameNotFoundException {
+		Optional<User> user = userRepository.findByName(name);
 		List<Role> roles = new LinkedList<>();
 		if (user == null) {
 			throw new RuntimeException("NOT FOUND");

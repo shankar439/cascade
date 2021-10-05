@@ -25,7 +25,6 @@ public class AppointmentController {
 
     @PostMapping("/create")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse addAppointment(@RequestBody AppointmentDTO appointmentDTO) {
     	BaseResponse<Appointment> baseResponse = null;
         baseResponse = BaseResponse.<Appointment>builder().Data(appointmentServiceInterface.AddAppointment(appointmentDTO)).build();
@@ -33,8 +32,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/getAll")
-    @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
+    @RolesAllowed(value = "ADMIN")
     public BaseResponse<List<Appointment>> list() {
     	BaseResponse<List<Appointment>> baseResponse = null;
     	baseResponse = BaseResponse.<List<Appointment>>builder().Data(appointmentServiceInterface.ListAllAppointment()).build();
@@ -43,7 +41,6 @@ public class AppointmentController {
 
     @PutMapping("/update")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<Appointment>> update(@RequestBody AppointmentDTO appointmentDTO){
     	BaseResponse<Optional<Appointment>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<Appointment>>builder().Data(appointmentServiceInterface.UpdateAppointment(appointmentDTO)).build();
@@ -52,7 +49,6 @@ public class AppointmentController {
 
     @PutMapping("/softdelete")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<Appointment>> deleteSoftAppointment(@RequestBody AppointmentDTO appointmentDTO){
     	BaseResponse<Optional<Appointment>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<Appointment>>builder().Data(appointmentServiceInterface.DeleteSoftAppointment(appointmentDTO)).build();

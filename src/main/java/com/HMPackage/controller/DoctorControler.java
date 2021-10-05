@@ -2,7 +2,6 @@ package com.HMPackage.controller;
 
 import java.util.Optional;
 import com.HMPackage.baseResponse.PageResponse;
-import io.swagger.annotations.Authorization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,6 @@ import com.HMPackage.DTO.DoctorDTO;
 import com.HMPackage.baseResponse.BaseResponse;
 import com.HMPackage.entity.Doctor;
 import com.HMPackage.service.DoctorServiceInterface;
-
 import javax.annotation.security.RolesAllowed;
 
 @RestController
@@ -26,7 +24,6 @@ public class DoctorControler {
 
     @PostMapping("/create")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse AddDoctor(@RequestBody DoctorDTO doctorDTO) {
     	BaseResponse<Doctor> baseResponse = null;
         baseResponse = BaseResponse.<Doctor>builder().Data(doctorServiceInterface.AddDoctor(doctorDTO)).build();
@@ -35,7 +32,6 @@ public class DoctorControler {
 
     @GetMapping("/get/{doctorId}")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<Doctor>> findByDoctorId(@PathVariable Long doctorId){
     	BaseResponse<Optional<Doctor>> baseResponse = null;
     	baseResponse = BaseResponse.<Optional<Doctor>>builder().Data(doctorServiceInterface.findByDoctorId(doctorId)).build();
@@ -44,7 +40,6 @@ public class DoctorControler {
 
     @PutMapping("/update")
     @RolesAllowed(value = "USER")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<Doctor>> updateDoctor(@RequestBody DoctorDTO doctorDTO){
     	BaseResponse<Optional<Doctor>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<Doctor>>builder().Data(doctorServiceInterface.UpdateDoctorById(doctorDTO)).build();
@@ -53,7 +48,6 @@ public class DoctorControler {
 
     @PutMapping("/softdelete")
     @RolesAllowed(value = "ADMIN")
-    @Authorization(value="Bearer")
     public BaseResponse<Optional<Doctor>>  deleteSoft(@RequestBody DoctorDTO doctorDTO){
     	BaseResponse<Optional<Doctor>> baseResponse = null;
         baseResponse = BaseResponse.<Optional<Doctor>>builder().Data(doctorServiceInterface.DeleteSoftDoctor(doctorDTO)).build();
@@ -62,7 +56,6 @@ public class DoctorControler {
 
     @GetMapping("/pagination/{pageno}/{pageSize}/{doctorName}")
     @RolesAllowed(value = "ADMIN")
-    @Authorization(value="Bearer")
     private PageResponse<Doctor> pageByDoctorName(@PathVariable int pageno, @PathVariable int pageSize, @PathVariable String doctorName){
         return doctorServiceInterface.pageByDoctorName(pageno, pageSize, doctorName);
     }
