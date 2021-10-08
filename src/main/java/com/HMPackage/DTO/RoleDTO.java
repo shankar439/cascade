@@ -8,4 +8,6 @@ import lombok.NoArgsConstructor;
 public class RoleDTO {
     private Long roleId;
     private String roleName;
+    private int isActive;
+    private int isDelete;
 }

@@ -1,5 +1,6 @@
 package com.HMPackage.DTO;
 
+import com.HMPackage.entity.Role;
 import lombok.Data;
 import java.util.List;
 
@@ -10,5 +11,7 @@ public class UserDTO {
 	private String password;
 	private int isActive;
 	private int isDelete;
-	private List<RoleDTO>roleDTO;
+	private String roleName;
+	private List<Role>roles;
+
 }

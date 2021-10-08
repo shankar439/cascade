@@ -1,13 +1,9 @@
 package com.HMPackage.serviceImplementation;
 
 import java.util.*;
-import com.HMPackage.DTO.JWTtokenDTO;
-import com.HMPackage.DTO.RoleDTO;
 import com.HMPackage.DTO.UserRoleDTO;
 import com.HMPackage.entity.Role;
-import com.HMPackage.entity.UserRole;
 import com.HMPackage.repository.RoleRepository;
-import com.HMPackage.repository.UserRoleRepository;
 import org.springframework.data.domain.Pageable;
 import com.HMPackage.baseResponse.PageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,27 +26,25 @@ public class UserServiceImpl implements UserServiceInterface{
 	private UserRepository userRepository;
 	@Autowired
 	private RoleRepository roleRepository;
-	@Autowired
-	private UserRoleRepository userRoleRepository;
 
 
-	private void saveRole(List<RoleDTO> roleDTO, User user) {
-		try {
-			List<UserRole> userRole = new LinkedList<>();
-			if (Objects.nonNull(roleDTO) && roleDTO.size() > 0) {
-				roleDTO.stream().forEachOrdered(role -> {
-					Role role1 = roleRepository.findById(role.getRoleId()).orElseThrow(() -> new RuntimeException("not found"));
-					UserRole userRoleObj = new UserRole();
-					userRoleObj.setUser(user);
-					userRoleObj.setRole(role1);
-					userRole.add(userRoleObj);
-				});
-				userRoleRepository.saveAll(userRole);
-			}
-		}catch (Exception e){
-			e.printStackTrace();
-		}
-	}
+//	private void saveRole(List<RoleDTO> roleDTO, User user) {
+//		try {
+//			List<UserRole> userRole = new LinkedList<>();
+//			if (Objects.nonNull(roleDTO) && roleDTO.size() > 0) {
+//				roleDTO.stream().forEachOrdered(role -> {
+//					Role role1 = roleRepository.findById(role.getRoleId()).orElseThrow(() -> new RuntimeException("not found"));
+//					UserRole userRoleObj = new UserRole();
+//					userRoleObj.setUser(user);
+//					userRoleObj.setRole(role1);
+//					userRole.add(userRoleObj);
+//				});
+//				userRoleRepository.saveAll(userRole);
+//			}
+//		}catch (Exception e){
+//			e.printStackTrace();
+//		}
+//	}
 	@Override
 	public UserRoleDTO login(UserRoleDTO userRoleDTO) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -59,15 +53,14 @@ public class UserServiceImpl implements UserServiceInterface{
 			Optional<User> user= userRepository.findByName(userRoleDTO.getName());
 			boolean status = bcrypt.matches(userRoleDTO.getPassword(), user.get().getPassword());
 			if (user.isPresent() && status == true) {
-				List<UserRole> userRole = userRoleRepository.findByUserId(user.get().getId());
-				userRole.stream().forEachOrdered(userRoleobj -> {
-					Role role = userRoleobj.getRole();
+				user.get().getRole().stream().forEachOrdered(role -> {
+					Role role1 = new Role();
+					role1.setRoleName(role.getRoleName());
 					roles.add(role);
 				});
 				String Token = generateToken("user", user.get().getId(), user.get().getName(), roles);
 				userRoleDTO.setName(user.get().getName());
-				userRoleDTO.setUserRoleId(user.get().getId());
-				userRoleDTO.setUserRoles(user.get().getUserRole());
+				userRoleDTO.setId(user.get().getId());
 				userRoleDTO.setToken(Token);
 			}
 		} catch (Exception e) {
@@ -83,9 +76,9 @@ public class UserServiceImpl implements UserServiceInterface{
 			throw new RuntimeException("NOT FOUND");
 		}
 		else{
-			List<UserRole> userRoles = userRoleRepository.findByUserId(user.get().getId());
-			userRoles.stream().forEachOrdered(userRole -> {
-				Role role = userRole.getRole();
+			user.get().getRole().stream().forEachOrdered(role -> {
+				Role role1 = new Role();
+				role1.setRoleName(role.getRoleName());
 				roles.add(role);
 			});
 			return new org.springframework.security.core.userdetails.User(user.get().getName(), user.get().getPassword(),
@@ -107,15 +100,31 @@ public class UserServiceImpl implements UserServiceInterface{
         user.setName(userDTO.getName());
 		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
 		user.setPassword(bCrypt.encode(userDTO.getPassword()));
-		saveRole(userDTO.getRoleDTO(),user);
-		userRepository.save(user);
+		List<Role> roles = new LinkedList<>();
+		userDTO.getRoles().stream().forEachOrdered(role -> {
+			Role roleObj = new Role();
+			roleObj.setRoleName(role.getRoleName());
+			roles.add(roleObj);
+		});
+		user.setRole(roles);
+		user=userRepository.save(user);
 		return user;
 	}
 
 	@Override
 	public Optional<User> getUserbyId(Long id) {
 	    Optional<User> user=userRepository.findById(id);
-        return user;
+	    if(user.isPresent()){
+	    	if(user.get().getIsDelete()==0){
+				return user;
+			}
+	    	else{
+	    		throw new RuntimeException("This User is Deleted");
+			}
+		}
+        else {
+			throw new RuntimeException("Enter A Valid User ID");
+		}
 	}
 
 	@Override
@@ -127,8 +136,15 @@ public class UserServiceImpl implements UserServiceInterface{
 	        	user.get().setName(userDTO.getName());
 	        	BCryptPasswordEncoder bcrupt=new BCryptPasswordEncoder();
 	        	user.get().setPassword(bcrupt.encode(userDTO.getPassword()));
-	            userRepository.save(user.get());
-	        }
+				List<Role> roles = new LinkedList<>();
+				userDTO.getRoles().stream().forEachOrdered(role -> {
+					Role roleObj = roleRepository.findById(role.getRoleId()).orElse(null);
+					roleObj.setRoleName(role.getRoleName());
+					roles.add(roleObj);
+				});
+				user.get().setRole(roles);
+				userRepository.save(user.get());
+			}
 	        else
 	        {
 	            throw new RuntimeException("Enter A Valid UserId");

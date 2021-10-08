@@ -41,12 +41,13 @@ public class User {
 	@Column(name = "is_deleted_user",columnDefinition = "integer default 0")
 	private int isDelete;
 
-	@OneToMany(mappedBy = "role",cascade = CascadeType.ALL)
-	private List<UserRole> userRole;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_fk")
+	private List<Role> role;
 
 	public User(User user){
-		this.name = name;
-		this.password = password;
-		this.userRole=userRole;
+		this.name = user.getName();
+		this.password = user.getPassword();
+		this.role=user.getRole();
 	}
 }
