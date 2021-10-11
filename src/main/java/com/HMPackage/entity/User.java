@@ -42,7 +42,8 @@ public class User {
 	private int isDelete;
 
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_fk")
+	@JoinTable(name="user_role", joinColumns={@JoinColumn(name="user_id_fk", referencedColumnName="id")}
+			, inverseJoinColumns={@JoinColumn(name="role_id_fk", referencedColumnName="role_id")})
 	private List<Role> role;
 
 	public User(User user){

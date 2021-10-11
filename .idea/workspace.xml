@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac2f4910-b81d-41d0-83e0-57c2e8a9bba2" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/exception/GlobalException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/exception/BadRequestEx.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/exception/NotFoundEx.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/exception/UnAuthEx.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/JWTtokenDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/JWTtokenDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/RoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/RoleDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserRoleDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/DTO/UserRoleDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/baseResponse/BaseResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/baseResponse/BaseResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/UserRoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/UserRoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/service/UserServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/service/UserServiceInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/entity/UserRole.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/exception/GlobalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/exception/GlobalException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/repository/UserRoleRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/serviceImplementation/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/serviceImplementation/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/HMPackage/util/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/HMPackage/util/JwtUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633431322337</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="commit">
+      <created>1633680854775</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1633680854775</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

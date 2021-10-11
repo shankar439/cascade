@@ -3,6 +3,7 @@ package com.HMPackage.serviceImplementation;
 import java.util.*;
 import com.HMPackage.DTO.UserRoleDTO;
 import com.HMPackage.entity.Role;
+import com.HMPackage.exception.NotFoundEx;
 import com.HMPackage.repository.RoleRepository;
 import org.springframework.data.domain.Pageable;
 import com.HMPackage.baseResponse.PageResponse;
@@ -28,23 +29,23 @@ public class UserServiceImpl implements UserServiceInterface{
 	private RoleRepository roleRepository;
 
 
-//	private void saveRole(List<RoleDTO> roleDTO, User user) {
-//		try {
-//			List<UserRole> userRole = new LinkedList<>();
-//			if (Objects.nonNull(roleDTO) && roleDTO.size() > 0) {
-//				roleDTO.stream().forEachOrdered(role -> {
-//					Role role1 = roleRepository.findById(role.getRoleId()).orElseThrow(() -> new RuntimeException("not found"));
-//					UserRole userRoleObj = new UserRole();
-//					userRoleObj.setUser(user);
-//					userRoleObj.setRole(role1);
-//					userRole.add(userRoleObj);
-//				});
-//				userRoleRepository.saveAll(userRole);
-//			}
-//		}catch (Exception e){
-//			e.printStackTrace();
-//		}
-//	}
+	@Override
+	public User addUser(UserDTO userDTO) {
+		User user = new User();
+		user.setName(userDTO.getName());
+		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+		user.setPassword(bCrypt.encode(userDTO.getPassword()));
+		List<Role> roles = new LinkedList<>();
+		userDTO.getRoles().stream().forEachOrdered(role -> {
+			Role roleObj = new Role();
+			roleObj.setRoleName(role.getRoleName());
+			roles.add(roleObj);
+		});
+		user.setRole(roles);
+		user=userRepository.save(user);
+		return user;
+	}
+
 	@Override
 	public UserRoleDTO login(UserRoleDTO userRoleDTO) {
 		BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
@@ -58,13 +59,13 @@ public class UserServiceImpl implements UserServiceInterface{
 					role1.setRoleName(role.getRoleName());
 					roles.add(role);
 				});
-				String Token = generateToken("user", user.get().getId(), user.get().getName(), roles);
-				userRoleDTO.setName(user.get().getName());
+				String Token = generateToken("secret", "user", user.get().getId(), user.get().getName(), roles);
 				userRoleDTO.setId(user.get().getId());
+				userRoleDTO.setName(user.get().getName());
 				userRoleDTO.setToken(Token);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new NotFoundEx();
 		}
 		return userRoleDTO;
 	}
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserServiceInterface{
 		Optional<User> user = userRepository.findByName(name);
 		List<Role> roles = new LinkedList<>();
 		if (user == null) {
-			throw new RuntimeException("NOT FOUND");
+			throw new NotFoundEx();
 		}
 		else{
 			user.get().getRole().stream().forEachOrdered(role -> {
@@ -95,23 +96,6 @@ public class UserServiceImpl implements UserServiceInterface{
 	}
 
 	@Override
-	public User addUser(UserDTO userDTO) {
-        User user = new User();
-        user.setName(userDTO.getName());
-		BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-		user.setPassword(bCrypt.encode(userDTO.getPassword()));
-		List<Role> roles = new LinkedList<>();
-		userDTO.getRoles().stream().forEachOrdered(role -> {
-			Role roleObj = new Role();
-			roleObj.setRoleName(role.getRoleName());
-			roles.add(roleObj);
-		});
-		user.setRole(roles);
-		user=userRepository.save(user);
-		return user;
-	}
-
-	@Override
 	public Optional<User> getUserbyId(Long id) {
 	    Optional<User> user=userRepository.findById(id);
 	    if(user.isPresent()){
@@ -123,7 +107,7 @@ public class UserServiceImpl implements UserServiceInterface{
 			}
 		}
         else {
-			throw new RuntimeException("Enter A Valid User ID");
+			throw new NotFoundEx();
 		}
 	}
 
@@ -147,7 +131,7 @@ public class UserServiceImpl implements UserServiceInterface{
 			}
 	        else
 	        {
-	            throw new RuntimeException("Enter A Valid UserId");
+	            throw new NotFoundEx();
 	        }
 	        return user;
 	}
@@ -163,7 +147,7 @@ public class UserServiceImpl implements UserServiceInterface{
         }
         else
         {
-            throw new RuntimeException("data not found");
+            throw new NotFoundEx();
         }
         return user;
 	}
